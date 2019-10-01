@@ -1,29 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const User = require('../models/User');
+const router = require('express').Router()
 const passport = require('../config/passport');
+const {registerUser, userLogin, logout, getProfile} = require('../controllers/usercontroller')
+const {catchErrors} =  require('../middlewares/catchErrors')
 
-router.post('/signup', (req, res, next) => {
-  User.register(req.body, req.body.password)
-    .then((user) => res.status(201).json({ user }))
-    .catch((err) => res.status(500).json({ err }));
-});
 
-router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  const { user } = req;
-  res.status(200).json({ user });
-});
+router.post('/signup', catchErrors(registerUser));
 
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  res.status(200).json({ msg: 'Logged out' });
-});
+router.post('/login', passport.authenticate('local'), catchErrors(userLogin));
 
-router.get('/profile', isAuth, (req, res, next) => {
-  User.findById(req.user._id)
-    .then((user) => res.status(200).json({ user }))
-    .catch((err) => res.status(500).json({ err }));
-});
+router.get('/logout', logout);
+
+router.get('/profile', isAuth, getProfile);
 
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });
