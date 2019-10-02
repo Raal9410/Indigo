@@ -1,15 +1,12 @@
 const {Schema, model} = require('mongoose')
 
-const userProfile = new Schema(
+const profileSchema = new Schema(
     {
-    user: [{
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-        }],
-    mainInstrument: {
-      type: String,
-      required: true
-    },
+        },
+    mainInstrument: String,
     musicInfluences: [Object],
     profileImg: {
       type: String,
@@ -29,4 +26,4 @@ const userProfile = new Schema(
     }
 )
 
-module.exports = model('Profile', userProfile)
+module.exports = model('Profile', profileSchema)

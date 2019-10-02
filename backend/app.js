@@ -9,7 +9,7 @@ const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 const passport = require('./config/passport');
-
+const routes = require('./routes/auth');
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
@@ -46,9 +46,8 @@ app.use(cookieParser());
 app.use(logger('dev'));
 
 const index = require('./routes/index');
-const auth = require('./routes/auth');
 app.use('/', index);
-app.use('api/auth', auth);
+app.use('/api/auth', routes);
 
 // Uncomment this line for production
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
