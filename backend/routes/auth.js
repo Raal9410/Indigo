@@ -1,5 +1,7 @@
 const router = require('express').Router()
+const SpotifyWebApi = require('spotify-web-api-node')
 const passport = require('../config/passport');
+const uploadCloud= require('../config/cloudinary')
 const {registerUser, userLogin, logout, getProfile} = require('../controllers/usercontroller')
 const {catchErrors} =  require('../middlewares/catchErrors')
 
@@ -8,14 +10,21 @@ const {editProfile} = require('../controllers/profilecontroller')
 
 router.post('/signup', catchErrors(registerUser));
 
-router.post('/login', passport.authenticate('local'), catchErrors(userLogin));
-
+router.get('/login', passport.authenticate('spotify'));
+router.get('/login/callback', passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {// Successful authentication, redirect home.
+  console.log('fdsafdnsakjfndsjklanfjkdslabfjdlsafjldsa PUTOS')  
+  res.redirect('http://localhost:3006/profile');
+  }
+);
 router.get('/logout', logout);
 
-router.get('/profile', isAuth, getProfile);
+router.post('/profile', catchErrors(getProfile));
+
 
 //profile routes
-router.post('/editProfile', isAuth, catchErrors(editProfile))
+router.post('/editProfile', isAuth, uploadCloud.single('img'), catchErrors(editProfile))
+
+
 
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });

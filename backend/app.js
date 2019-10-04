@@ -10,6 +10,8 @@ const cors = require('cors');
 const session = require('express-session');
 const passport = require('./config/passport');
 const routes = require('./routes/auth');
+
+
 mongoose
   .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
@@ -53,3 +55,6 @@ app.use('/api/auth', routes);
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 
 module.exports = app;
+
+
+//FRONTENDPOINT=http://localhost:3006

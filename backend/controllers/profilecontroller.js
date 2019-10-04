@@ -1,33 +1,32 @@
-const Profile = require('../models/Profile')
-const User = require('../models/Profile')
+
+const User = require('../models/User')
 
 exports.editProfile = async(req, res, next) => {
-  const enabledUpdatesProfile = ['mainInstrument',  'profileImg', 'musicInfluences'];
-  const enabledUpdatesUser = ['username',  'name', 'lastName'];
-  const updateProfile = {};
+  const enabledUpdatesUser = ['username',  'name', 'lastName', 'mainInstrument'];
   const updateUser = {};
   for (const key in req.body) {
-    if (enabledUpdatesProfile.includes(key)){
-      updateProfile[key] = req.body[key];
-    } else if (enabledUpdatesUser){
-      updateUser[key] = req.body[key]
-    }
+    if (enabledUpdatesUser.includes(key))
+      updateUser[key] = req.body[key];
+    } 
+  if(req.file){
+    updateProfile.img = req.file.secure_url
   }
-  const profile = await Profile.findOneAndUpdate({user:req.user.id}, updateProfile, { new: true }).populate('user');
-  const user = await User.findByIdAndUpdate(req.user._id)
-  res.status(200).send({profile, user});
+  console.log('asasdsadsads', req.file)
+  const user = await User.findByIdAndUpdate(req.user.id, updateUser, {new: true})
+  console.log(user)
+  res.status(200).send({user});
 }
 
 
 exports.editInfluences = async(req, res, next)=>{
-  const enabledUpdates = ['musicInfluences'];
-  const updates = {};
+  const enabledUpdatesInfluences = ['musicInfluences'];
+  const updateInfluences = {};
   for (const key in req.body) {
-    if (enabledUpdates.includes(key)) updates[key] = req.body[key];
+    if (enabledUpdatesInfluences.includes(key)) updateInfluences[key] = req.body.musicInfluences[key];
   }
 
-  const user = await Profile.findByIdAndUpdate(req.user.id, updates, { new: true });
+  const User = await Profile.findByIdAndUpdate(req.user.id, updateinflueces, { new: true });
 
-  res.status(200).send(user);
+  res.status(200).send(profile);
 }
 

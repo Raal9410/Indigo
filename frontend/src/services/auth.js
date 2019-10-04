@@ -8,8 +8,9 @@ const SERVICE = axios.create({ baseURL: 'http://localhost:3001/api/auth', withCr
 
 const AUTH_SERVICE = {
   signup: (user) => SERVICE.post('/signup', user),
-  login: (user) => SERVICE.post('/login', user),
+  login: (user) => SERVICE.get('/login', user),
   logout: () => SERVICE.get('/logout'),
+  getProfile: (user)=>SERVICE.post('/profile', user),
   editProfile:(update) => SERVICE.post('/editProfile', update),
   getUser: () => SERVICE.get('/loggedin')
 };

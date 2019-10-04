@@ -4,14 +4,15 @@ import AUTH_SERVICE from '../../services/auth'
 
 class Profile extends Component {
   state = {
-    user: {
-    },
+    user: {},
     profile: {}
   }
 
-  componentDidMount = () => {
-    if(!localStorage.user) return this.props.history.push('/login')
-    this.setState({ user: JSON.parse(localStorage.user), profile: JSON.parse(localStorage.profile)})
+  componentDidMount = async () => {
+    const {data: user} = await AUTH_SERVICE.getProfile(this.state.user)
+   // if(!user) return this.props.history.push('/login')
+    localStorage.user = JSON.stringify(user)
+    this.setState({ user })
   }
 
   onLogout = async () => {
@@ -21,19 +22,17 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, name, lastName } = this.state.user
-    const { mainInstrument, musicInfluences, profileImg, friends} = this.state.profile
+    const { name, lastName } = this.state.user
+    const { mainInstrument, musicInfluences, img, friends} = this.state.profile
     return (
       <div>
         <div>
           <div>
             <h2>Profile</h2>
             <div>
-              <img style={{width: '200px'}}src={profileImg} alt={username}/>
+              <img style={{width: '200px'}}src={img} alt='sadsada'/>
             </div>
             <div>
-              <h2>Username</h2>
-              <p>{username}</p>
             </div>
             <div>
               <h2>Name</h2>
@@ -60,6 +59,9 @@ class Profile extends Component {
           <div className="right-side">
             <div>
               <Link to="/profile/editProfile">Edit</Link>
+               <br/>
+          
+              <Link to="/spotify">Search Artist</Link>
             </div>
           </div>
         </div>

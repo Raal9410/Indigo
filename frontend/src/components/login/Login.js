@@ -4,10 +4,7 @@ import AUTH_SERVICE from '../../services/auth'
 
 class Login extends Component {
   state = {
-    user: {
-      username: '',
-      password: ''
-    }
+    user: {}
   }
 
   componentDidMount = () => {
@@ -28,16 +25,13 @@ class Login extends Component {
   }
 
   onSubmit = async (e) => {
-    const {data: {user, userProfile}} = await AUTH_SERVICE.login(this.state.user)
+    const {data: user} = await AUTH_SERVICE.login(this.state.user)
     localStorage.user = JSON.stringify(user);
-    localStorage.profile = JSON.stringify(userProfile)
-    //console.log(data)
     console.log(user)
     this.props.history.push('/profile')
   }
 
   render() {
-    const { username, password} = this.state.user
     return (
       <div>
         <div>
@@ -47,17 +41,18 @@ class Login extends Component {
             <div>
             <h2>Log in</h2>
             </div>
-            <form>
+            {/*<form>
               <label htmlFor="username">Username</label>
               <input type="text" name="username" id="username" value={username} onChange={this.handleInput} />
               <label htmlFor="password">Password</label>
               <input type="password" name="password" id="password" value={password} onChange={this.handleInput} />
-            </form>
-            <p>If you don't have an account yet, you can create one <Link to="/signup">here</Link></p>
+            </form> */}
           </div>
           <div>
             <div>
-              <button onClick={this.onSubmit}>Log in</button>
+              <a href="http://localhost:3001/api/auth/login">
+              <button>Log in with Spotify</button>
+              </a>
             </div>
           </div>
         </div>
