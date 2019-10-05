@@ -1,29 +1,51 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AUTH_SERVICE from '../../services/auth'
+import SpotifyWebApi from 'spotify-web-api-js'
+const spotifyWebApi =  new SpotifyWebApi()
 
 class Profile extends Component {
-  state = {
-    user: {},
-    profile: {}
+  constructor(){
+    super();
+    const params = this.getHashParams();
+    let token = params.refresh_token
+    if (token) {
+      if(!localStorage.token) localStorage.setItem('token', JSON.stringify(token))
+      spotifyWebApi.setAccessToken(token);
+    }
+    this.state = {
+      loggedIn: token ? true : false,
+      user:{ }
+    }
+  }
+
+  getHashParams() {
+    var hashParams = {};
+    var e, r = /([^&;=]+)=?([^&;]*)/g,
+        q = window.location.hash.substring(1);
+    e = r.exec(q)
+    while (e) {
+       hashParams[e[1]] = decodeURIComponent(e[2]);
+       e = r.exec(q);
+    }
+    return hashParams;
   }
 
   componentDidMount = async () => {
     const {data: user} = await AUTH_SERVICE.getProfile(this.state.user)
-   // if(!user) return this.props.history.push('/login')
+    if(!user) return this.props.history.push('/login')
     localStorage.user = JSON.stringify(user)
-    this.setState({ user })
+    this.setState({ user: JSON.parse(localStorage.user) })
   }
 
   onLogout = async () => {
     await AUTH_SERVICE.logout();
-    delete localStorage.user;
+    localStorage.clear()
     this.props.history.push('/login')
   }
 
   render() {
-    const { name, lastName } = this.state.user
-    const { mainInstrument, musicInfluences, img, friends} = this.state.profile
+    const { name, lastName, mainInstrument, musicInfluences, img, friends, username } = this.state.user
     return (
       <div>
         <div>
@@ -33,6 +55,10 @@ class Profile extends Component {
               <img style={{width: '200px'}}src={img} alt='sadsada'/>
             </div>
             <div>
+            </div>
+            <div>
+              <h2>username</h2>
+              <p>{username}</p>
             </div>
             <div>
               <h2>Name</h2>
@@ -48,7 +74,12 @@ class Profile extends Component {
             </div>
             <div>
               <h2>Music Influences</h2>
-              <p>{musicInfluences}</p>
+              <Link to="/spotify">Search Artist</Link>
+                {/*<ul>
+                <li>{musicInfluences.map((musicInf, i)=>{
+                  return <li>{musicInf}</li>
+                })}</li>
+              </ul>*/}
             </div>
             <div>
               <h2>Friends</h2>
@@ -58,10 +89,15 @@ class Profile extends Component {
           </div>
           <div className="right-side">
             <div>
-              <Link to="/profile/editProfile">Edit</Link>
+              <Link to="/profile/editProfile">Edit Profile</Link>
                <br/>
-          
-              <Link to="/spotify">Search Artist</Link>
+
+              <br/>
+              <a href="http://localhost:8888">
+                <button>Connect your Spotify account</button>
+              </a>
+              <br/> 
+              <br/>
             </div>
           </div>
         </div>

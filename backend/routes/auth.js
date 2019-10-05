@@ -10,12 +10,9 @@ const {editProfile} = require('../controllers/profilecontroller')
 
 router.post('/signup', catchErrors(registerUser));
 
-router.get('/login', passport.authenticate('spotify'));
-router.get('/login/callback', passport.authenticate('spotify', { failureRedirect: '/login' }), function(req, res) {// Successful authentication, redirect home.
-  console.log('fdsafdnsakjfndsjklanfjkdslabfjdlsafjldsa PUTOS')  
-  res.redirect('http://localhost:3006/profile');
-  }
-);
+
+router.post('/login', passport.authenticate('local'), userLogin);
+
 router.get('/logout', logout);
 
 router.post('/profile', catchErrors(getProfile));

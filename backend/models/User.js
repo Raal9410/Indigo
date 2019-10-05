@@ -1,14 +1,20 @@
 const { Schema, model } = require('mongoose');
-
+const PLM = require('passport-local-mongoose')
 const userSchema = new Schema(
   {
     spotifyId: String,
     accessToken: String,
+    username: {
+      type: String,
+      required: true
+    },
     name: {
       type: String,
+      required: true
     },
     lastName:{
-      type: String
+      type: String,
+      required: true
     },
   mainInstrument: String,
   musicInfluences: [Object],
@@ -24,4 +30,5 @@ const userSchema = new Schema(
   }
 );
 
+userSchema.plugin(PLM, {usernameField: 'username'})
 module.exports = model('User', userSchema);

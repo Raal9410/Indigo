@@ -55,6 +55,6 @@ app.use('/api/auth', routes);
 // app.get('/*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 
 module.exports = app;
-
+//app.listen(process.env.PORT, ()=>{console.log('server is app')})
 
 //FRONTENDPOINT=http://localhost:3006

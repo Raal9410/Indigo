@@ -4,7 +4,10 @@ import AUTH_SERVICE from '../../services/auth'
 
 class Login extends Component {
   state = {
-    user: {}
+    user: {
+      username: '',
+      password: ''
+    }
   }
 
   componentDidMount = () => {
@@ -32,6 +35,7 @@ class Login extends Component {
   }
 
   render() {
+    const { username, password} = this.state.user
     return (
       <div>
         <div>
@@ -41,18 +45,17 @@ class Login extends Component {
             <div>
             <h2>Log in</h2>
             </div>
-            {/*<form>
+            <form>
               <label htmlFor="username">Username</label>
               <input type="text" name="username" id="username" value={username} onChange={this.handleInput} />
               <label htmlFor="password">Password</label>
               <input type="password" name="password" id="password" value={password} onChange={this.handleInput} />
-            </form> */}
+            </form>
           </div>
           <div>
+          <p>If you don't have an account yet, you can create one <Link to="/signup">here</Link></p>
             <div>
-              <a href="http://localhost:3001/api/auth/login">
-              <button>Log in with Spotify</button>
-              </a>
+            <button onClick={this.onSubmit}>Log in</button>
             </div>
           </div>
         </div>

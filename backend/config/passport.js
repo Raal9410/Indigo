@@ -1,7 +1,14 @@
 const User = require('../models/User');
 const passport = require('passport')
-const SpotifyStrategy = require('passport-spotify').Strategy;
 
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+module.exports = passport;
+
+//const SpotifyStrategy = require('passport-spotify').Strategy;
+/*
 passport.use(
   new SpotifyStrategy(
     {
@@ -9,17 +16,19 @@ passport.use(
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: 'http://localhost:3001/api/auth/login/callback'
     },
-    access = async(accessToken, refreshToken, expires_in, profile, done)=> {
+    async (accessToken, refreshToken, expires_in, profile, done)=> {
         const spotifyUser = await User.findOne({spotifyId: profile.id})
-        //console.log(spotifyUser)
+        console.log(spotifyUser)
         if(!spotifyUser){
-            User.create({spotifyId: profile.id, accessToken})
+            const user = await User.create({spotifyId: profile.id, accessToken})
+            done(user)
         } else {
             return done(spotifyUser);
         }
     }
   )
 );
+
 passport.serializeUser((user, done) => {
     done(null, user.id);
   });
@@ -28,5 +37,4 @@ passport.serializeUser((user, done) => {
       done(err, user);
     });
   });
-
-module.exports = passport;
+  */

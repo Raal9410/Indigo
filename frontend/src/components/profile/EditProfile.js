@@ -3,32 +3,26 @@ import AUTH_SERVICE from '../../services/auth';
 
 class EditProfile extends Component{
     state={
-        profile:{
+        user:{
             username: '',
             name: '',
             lastName: '',
             mainInstrument: '',
-            musicInfluences: '',
-            friends: ''
-        }, 
-        img: ''
+            friends: '',
+            img: ''
+        }
     }
     componentDidMount(){
         this.setState((prevState)=>{
-            const {profile} = prevState
-            const userProfile = JSON.parse(localStorage.profile)
-            const user = JSON.parse(localStorage.user)
-            console.log(profile)
+            const {user} = prevState
+            const userProfile = JSON.parse(localStorage.user)
             console.log(userProfile)
             for(let key in userProfile){
                 if (key!=='img'){
-                    profile[key] = userProfile[key]
+                    user[key] = userProfile[key]
                 }
             }
-            for(let key in user){
-                profile[key] = user[key]
-            }
-            return ({profile})
+            return ({user})
         })
     }
 
@@ -36,31 +30,34 @@ class EditProfile extends Component{
         const key = e.target.name;
         const value = e.target.value
         this.setState(prevState => {
-            const {profile} = prevState;
-            profile[key] = value
+            const {user} = prevState;
+            user[key] = value
     
-          return { profile }
+          return { user }
         })}
 
     handleFile=(e)=>{
         this.setState({[e.target.name]: e.target.files[0]})
     }
 
+    goBack=()=>{
+        this.props.history.push('/profile')
+    }
+
     onSubmit = async (e) => {
         e.preventDefault()
         const fd = new FormData()
         fd.append('img', this.state.img)
-        for(const key in this.state.profile){
-            fd.append(key, this.state.profile[key])
+        for(const key in this.state.user){
+            fd.append(key, this.state.user[key])
         }
         console.log(fd.get('img'))
-        const {data: {user, profile}} = await AUTH_SERVICE.editProfile(fd)
+        const {data: user} = await AUTH_SERVICE.editProfile(fd)
         localStorage.user = JSON.stringify(user)
-        localStorage.profile = JSON.stringify(profile)
         this.props.history.push('/profile')
     }
     render(){
-        const {username, name, lastName, mainInstrument}= this.state.profile
+        const {username, name, lastName, mainInstrument}= this.state.user
         return(
             <div>
                 <h1>Update Profile</h1>
@@ -82,9 +79,11 @@ class EditProfile extends Component{
                     <input name="img" type="file"  onChange={this.handleFile}/>
                    
                     <br/>
-                    <img style={{width: '200px'}} src={this.state.img} alt={username}/>
+                    <img style={{width: '200px'}} src={this.state.user.img} alt={username}/>
                 </form>
                 <button onClick={this.onSubmit}>Update</button>
+                <button onClick={this.goBack}>Go Back</button>
+
             </div>
         )
     }

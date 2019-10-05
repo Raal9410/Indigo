@@ -1,60 +1,64 @@
 import React, { Component } from 'react'
-import Spotify from 'spotify-web-api-js'
-import axios from 'axios'
+import SpotifyWebApi from 'spotify-web-api-js'
 
-const spotifyWebApi =  new Spotify()
+const spotifyWebApi =  new SpotifyWebApi()
 
 class SpotifyLib extends Component {
     constructor(){
-        super()
-    const params = this.getHashParams()
-    this.state ={
-        loggedIn: params.access_token ? true : false,
-        artist:{
-            name:''
+        super();
+        const token = localStorage.token;
+        console.log(token)
+        if (token) {
+          spotifyWebApi.setAccessToken(token);
         }
-    }
-    if(params.access_token){
-        spotifyWebApi.setAccessToken(params.access_token)
-    }
+        this.state = {
+          loggedIn: token ? true : false,
+          query: '',
+          artists: []
+        }
+      }
+
+getArtist=()=>{
+    spotifyWebApi.searchArtists(this.state.query)
+    .then(data => {
+      console.log("The received data from the API: ", data);
+      this.setState({
+          artists:data.artists.items
+
+              })
+    })
+    .catch(err => {
+      console.log("The error while searching artists occurred: ", err);
+    })
 }
 
-componentDidMount= async()=>{
-const {data: tokenCallback} = await axios.get('http://localhost:3001/api/auth/spotify')
-this.setAccessToken({tokenCallback})
-console.log(tokenCallback)
+goBack=()=>{
+    this.props.history.push('/profile')
 }
 
-getHashParams() {
-    var hashParams = {};
-    var e, r = /([^&;=]+)=?([^&;]*)/g,
-    q = window.location.hash.substring(1);
-    while( e === r.exec(q)) {
-        hashParams[e[1]] = decodeURIComponent(e[2]);
+handleInput=(e)=>{
+    this.setState({
+        query: e.target.value
+    })
     }
-    return hashParams;
-}
-
-getAnArtist(input){
-    spotifyWebApi.searchArtists(input)
-    .then(function(data) {
-        console.log('Search by "Love"', data);
-    }, function(err) {
-        console.error(err);
-    });
-}
 render() {
     console.log(this.props.match)
     return (
             <div>
-                     <a href='http://localhost:8888'>
-        <button>Log into Spotify</button>
-      </a>
                 <div>
-                    <p>Searched Artist: {this.state.artist.name}</p>
+                    <h1>Search Artist</h1>
                 </div>
-                <input type='search' name='search' placeholder='Search' onChange={this.getAnArtist} />
-                <button type="submit" value="Submit" onClick={this.getAnArtist}>Artist</button>
+                <input type='search' name='search' value={this.state.query} onChange={this.handleInput} placeholder='Search'/>
+                <button type="submit" value="Submit"  onClick={this.getArtist}>Artist</button>
+                <br/>
+                <button type="submit" value="Go back" onClick={this.goBack}>Go Back To Profile</button>
+                    <p>Searched Artists:</p>
+                    <ul>
+                        {this.state.artists.map((artist, i)=>{
+                            return <li key={i}>{artist.name} <button>Add</button></li>
+                        })}
+                    </ul>
+                    
             </div>
         )
     }

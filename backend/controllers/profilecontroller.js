@@ -9,7 +9,7 @@ exports.editProfile = async(req, res, next) => {
       updateUser[key] = req.body[key];
     } 
   if(req.file){
-    updateProfile.img = req.file.secure_url
+    updateUser.img = req.file.secure_url
   }
   console.log('asasdsadsads', req.file)
   const user = await User.findByIdAndUpdate(req.user.id, updateUser, {new: true})
