@@ -8,7 +8,7 @@ class Profile extends Component {
   constructor(){
     super();
     const params = this.getHashParams();
-    let token = params.refresh_token
+    let token = params.access_token
     if (token) {
       if(!localStorage.token) localStorage.setItem('token', JSON.stringify(token))
       spotifyWebApi.setAccessToken(token);

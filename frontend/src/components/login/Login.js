@@ -41,7 +41,6 @@ class Login extends Component {
         <div>
           <div>
               <h1>Welcome to Indigo</h1>
-              <h4>Musicians meeting musicians by their own music taste.</h4>
             <div>
             <h2>Log in</h2>
             </div>
