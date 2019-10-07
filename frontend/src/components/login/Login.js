@@ -38,7 +38,7 @@ class Login extends Component {
     const { username, password} = this.state.user
     return (
       <div>
-        <div>
+        <div className="login">
           <div>
               <h1>Welcome to Indigo</h1>
             <div>

@@ -7,14 +7,15 @@ class SpotifyLib extends Component {
     constructor(){
         super();
         const token = localStorage.token;
-        console.log(token)
+        //console.log(token)
         if (token) {
           spotifyWebApi.setAccessToken(token);
         }
         this.state = {
           loggedIn: token ? true : false,
           query: '',
-          artists: []
+          artists: [],
+          artistInfo: {}
         }
       }
 
@@ -36,26 +37,45 @@ goBack=()=>{
     this.props.history.push('/profile')
 }
 
-handleInput=(e)=>{
+addArtist= (artist)=>{
+    //console.log(artist)
+    const {name, genres, id, images } = artist
     this.setState({
-        query: e.target.value
+        artistInfo : {name, genres, id, images}
     })
+    
+}
+
+// componentDidUpdate(prevState){
+//     const {artistInfo} = this.state
+//     if(this.state.artistInfo !== prevState.artistInfo){
+//         this.setState({artistInfo})
+//     }
+    
+//     }
+    
+    handleInput=(e)=>{
+        this.setState({
+            query: e.target.value
+        })
     }
-render() {
-    console.log(this.props.match)
+    render() {
+        
+        console.log(this.state.artistInfo)
     return (
             <div>
                 <div>
                     <h1>Search Artist</h1>
                 </div>
                 <input type='search' name='search' value={this.state.query} onChange={this.handleInput} placeholder='Search'/>
-                <button type="submit" value="Submit"  onClick={this.getArtist}>Artist</button>
+                <button type="submit" value="Submit"  onClick={this.getArtist}>Find</button>
                 <br/>
                 <button type="submit" value="Go back" onClick={this.goBack}>Go Back To Profile</button>
                     <p>Searched Artists:</p>
                     <ul>
                         {this.state.artists.map((artist, i)=>{
-                            return <li key={i}>{artist.name} <button>Add</button></li>
+                            return <li key={i}>{artist.name}<img style={{width:'100px'}} alt={artist.name}src={artist.images.length>0 ? artist.images[0].url: '' }/>
+                            <button onClick={() => this.addArtist(artist)}>Add</button></li>
                         })}
                     </ul>
                     

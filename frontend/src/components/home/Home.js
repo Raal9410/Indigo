@@ -11,7 +11,7 @@ function Home() {
       <h3>Musicians meeting musicians by their own music taste.</h3>
         </div>
         <div className="getstarted">
-      <h5 >Get started <Link to="/login">here</Link> !</h5>
+      <h5 ><Link to="/login">Get started!</Link></h5>
         </div>
       </div>
     </div>

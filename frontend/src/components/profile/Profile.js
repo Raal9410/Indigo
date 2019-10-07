@@ -15,7 +15,8 @@ class Profile extends Component {
     }
     this.state = {
       loggedIn: token ? true : false,
-      user:{ }
+      user:{ },
+      musicInf:[]
     }
   }
 
@@ -27,6 +28,7 @@ class Profile extends Component {
     while (e) {
        hashParams[e[1]] = decodeURIComponent(e[2]);
        e = r.exec(q);
+       localStorage.token = hashParams.access_token
     }
     return hashParams;
   }
@@ -45,7 +47,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { name, lastName, mainInstrument, musicInfluences, img, friends, username } = this.state.user
+    const { name, lastName, mainInstrument, img, friends, username } = this.state.user
     return (
       <div>
         <div>

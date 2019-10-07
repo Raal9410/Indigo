@@ -17,7 +17,9 @@ exports.editProfile = async(req, res, next) => {
   res.status(200).send({user});
 }
 
-
+exports.addInfluences= async(req, res, next)=>{
+  
+}
 exports.editInfluences = async(req, res, next)=>{
   const enabledUpdatesInfluences = ['musicInfluences'];
   const updateInfluences = {};
@@ -25,8 +27,8 @@ exports.editInfluences = async(req, res, next)=>{
     if (enabledUpdatesInfluences.includes(key)) updateInfluences[key] = req.body.musicInfluences[key];
   }
 
-  const User = await Profile.findByIdAndUpdate(req.user.id, updateinflueces, { new: true });
+  const user = await User.findByIdAndUpdate(req.user.id, updateinflueces, { new: true });
 
-  res.status(200).send(profile);
+  res.status(200).send(user);
 }
 

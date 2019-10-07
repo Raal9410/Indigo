@@ -32,17 +32,17 @@ code {
   height: 500px;
   width: 1000px; 
   background: rgb(26,26,59);
-background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(64,64,67,1) 100%, rgba(0,212,255,1) 100%);
-  color: rgba(147, 224, 31, 0.911);
+  background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(64,64,67,1) 100%, rgba(0,212,255,1) 100%);
+  color:rgb(245, 232, 212);
   border-radius: 10px
 }
 
 .homecard a {
-  color: rgb(214, 220, 224)
+  color: rgb(240, 244, 247)
 }
 
 .mainTitle{
-  font-size: 3rem;
+  font-size: 3.6rem;
   font-family: 'Notable', sans-serif;
   margin-left: 30px
 }
@@ -51,7 +51,7 @@ background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(6
   align-items:flex-end; 
   font-family: 'Kanit', sans-serif;
   font-size: 1.5rem;
-  margin-left: 70px
+  margin-left: 100px
 }
 
 .getstarted{
@@ -59,3 +59,68 @@ background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(6
   font-size: 1.7rem;
   margin-left: 400px
 }  
+
+.signup{
+  background-image: url('https://i.redd.it/wflems0j3fj11.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Kanit', sans-serif;
+  font-size: 1.2rem;
+  padding-bottom: 1.25rem;  
+}
+
+.signupCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.4);
+  height: 500px;
+  width: 300px; 
+  background: rgb(26,26,59);
+  background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(64,64,67,1) 100%, rgba(0,212,255,1) 100%);
+  color:rgb(245, 232, 212);
+  border-radius: 10px;
+}
+
+.signupForm input {
+  margin: 0 .25rem;
+  min-width: 125px;
+  border: 1px solid #eee;
+  border-left: 3px solid;
+  border-radius: 5px;
+  transition: border-color .5s ease-out;
+  background-color: rgba(26, 25, 25, 0.562);
+  color: white;
+}
+
+.signupForm input:required {
+  border-left-color: palegreen;
+}
+.signupForm input:invalid {
+  border-left-color: rgba(250, 128, 114, 0.842);
+}
+
+.signUpbutton{
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 1px 1px 3px #000000;
+  font-family: 'Kanit', sans-serif;
+  color: #ffffff;
+  font-size: 14px;
+  background: #61676b;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.signUpbutton{
+  background: #878087;
+  text-decoration: none;
+}
