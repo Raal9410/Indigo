@@ -15,8 +15,9 @@ class Profile extends Component {
     }
     this.state = {
       loggedIn: token ? true : false,
-      user:{ },
-      musicInf:[]
+      user:{},
+      musicInfluences:[]
+      
     }
   }
 
@@ -48,6 +49,8 @@ class Profile extends Component {
 
   render() {
     const { name, lastName, mainInstrument, img, friends, username } = this.state.user
+    const {musicInfluences} = this.state
+    console.log(this.state.musicInfluences)
     return (
       <div>
         <div>
@@ -77,11 +80,11 @@ class Profile extends Component {
             <div>
               <h2>Music Influences</h2>
               <Link to="/spotify">Search Artist</Link>
-                {/*<ul>
+                <ul>
                 <li>{musicInfluences.map((musicInf, i)=>{
-                  return <li>{musicInf}</li>
+                  return <li key={i}>{musicInf.name}</li>
                 })}</li>
-              </ul>*/}
+              </ul>
             </div>
             <div>
               <h2>Friends</h2>

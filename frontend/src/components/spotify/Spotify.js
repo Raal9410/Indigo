@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SpotifyWebApi from 'spotify-web-api-js'
+import AUTH_SERVICE from '../../services/auth';
 
 const spotifyWebApi =  new SpotifyWebApi()
 
@@ -15,7 +16,11 @@ class SpotifyLib extends Component {
           loggedIn: token ? true : false,
           query: '',
           artists: [],
-          artistInfo: {}
+          artistInfo: {
+              name:'',
+              id: '',
+              images: []
+          }
         }
       }
 
@@ -43,16 +48,11 @@ addArtist= (artist)=>{
     this.setState({
         artistInfo : {name, genres, id, images}
     })
+    console.log(this.state.artistInfo)
+    AUTH_SERVICE.editProfile({musicInfluences: {name, genres, id, images}})
     
-}
 
-// componentDidUpdate(prevState){
-//     const {artistInfo} = this.state
-//     if(this.state.artistInfo !== prevState.artistInfo){
-//         this.setState({artistInfo})
-//     }
-    
-//     }
+}
     
     handleInput=(e)=>{
         this.setState({
@@ -60,8 +60,8 @@ addArtist= (artist)=>{
         })
     }
     render() {
-        
-        console.log(this.state.artistInfo)
+       //console.log(this.state.artistInfo)
+       // const {name, id, images} = this.state.artistInfo
     return (
             <div>
                 <div>

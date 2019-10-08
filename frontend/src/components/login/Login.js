@@ -37,24 +37,24 @@ class Login extends Component {
   render() {
     const { username, password} = this.state.user
     return (
-      <div>
-        <div className="login">
-          <div>
+      <div className="login">
+        <div className="loginCard">
+          <div className="loginForm">
               <h1>Welcome to Indigo</h1>
-            <div>
+            <div >
             <h2>Log in</h2>
-            </div>
             <form>
               <label htmlFor="username">Username</label>
-              <input type="text" name="username" id="username" value={username} onChange={this.handleInput} />
+              <input type="text" name="username" id="username" value={username} onChange={this.handleInput} placeholder="Username" required />
               <label htmlFor="password">Password</label>
-              <input type="password" name="password" id="password" value={password} onChange={this.handleInput} />
+              <input type="password" name="password" id="password" value={password} onChange={this.handleInput} placeholder="Password" required/>
             </form>
           </div>
           <div>
           <p>If you don't have an account yet, you can create one <Link to="/signup">here</Link></p>
             <div>
-            <button onClick={this.onSubmit}>Log in</button>
+            <button className="loginbutton"onClick={this.onSubmit}>Log in</button>
+            </div>
             </div>
           </div>
         </div>

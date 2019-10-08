@@ -12,7 +12,8 @@ const AUTH_SERVICE = {
   logout: () => SERVICE.get('/logout'),
   getProfile: (user)=>SERVICE.post('/profile', user),
   editProfile:(update) => SERVICE.post('/editProfile', update),
-  getUser: () => SERVICE.get('/loggedin')
+  getUser: () => SERVICE.get('/loggedin'),
+  deleteMI: (id)=>SERVICE.delete('/deleteMI/', {id})
 };
 
 export default AUTH_SERVICE;

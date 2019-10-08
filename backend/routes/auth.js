@@ -6,7 +6,7 @@ const {registerUser, userLogin, logout, getProfile} = require('../controllers/us
 const {catchErrors} =  require('../middlewares/catchErrors')
 
 //profile
-const {editProfile} = require('../controllers/profilecontroller')
+const {editProfile, deleteInfluences} = require('../controllers/profilecontroller')
 
 router.post('/signup', catchErrors(registerUser));
 
@@ -21,7 +21,7 @@ router.post('/profile', catchErrors(getProfile));
 //profile routes
 router.post('/editProfile', isAuth, uploadCloud.single('img'), catchErrors(editProfile))
 
-
+router.delete('/deleteMI/', deleteInfluences)
 
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });
