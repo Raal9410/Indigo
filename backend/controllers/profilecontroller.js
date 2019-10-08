@@ -17,10 +17,13 @@ exports.editProfile = async(req, res, next) => {
 }
 
 exports.deleteInfluences = async(req, res, next)=>{
-const user = await User.findByIdAndDelete()
+const user = await User.findById(req.user.id)
+console.log('asdjfjaskdnfjkads', user)
 user.musicInfluences = user.musicInfluences.filter((currentMI)=>{
-return currentMI.id !== req.body.id
+return currentMI.id !== req.params.id
 })
+console.log('body', req.body)
+console.log('this shit', user.musicInfluences)
 await user.save()
 res.status(200).send({user}) 
 }

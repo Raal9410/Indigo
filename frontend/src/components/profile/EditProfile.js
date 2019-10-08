@@ -57,7 +57,7 @@ class EditProfile extends Component{
         this.props.history.push('/profile')
     }
     render(){
-        const {username, name, lastName, mainInstrument}= this.state.user
+        const {username, name, lastName, mainInstrument, img}= this.state.user
         return(
             <div>
                 <h1>Update Profile</h1>
@@ -79,7 +79,7 @@ class EditProfile extends Component{
                     <input name="img" type="file"  onChange={this.handleFile}/>
                    
                     <br/>
-                    <img style={{width: '200px'}} src={this.state.user.img} alt={username}/>
+                    <img style={{width: '200px'}} src={img} alt={username}/>
                 </form>
                 <button onClick={this.onSubmit}>Update</button>
                 <button onClick={this.goBack}>Go Back</button>

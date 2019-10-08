@@ -21,7 +21,7 @@ router.post('/profile', catchErrors(getProfile));
 //profile routes
 router.post('/editProfile', isAuth, uploadCloud.single('img'), catchErrors(editProfile))
 
-router.delete('/deleteMI/', deleteInfluences)
+router.delete('/deleteMI/:id', catchErrors(deleteInfluences))
 
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });

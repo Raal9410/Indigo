@@ -15,8 +15,9 @@ class Profile extends Component {
     }
     this.state = {
       loggedIn: token ? true : false,
-      user:{},
-      musicInfluences:[]
+      user:{
+        musicInfluences:[]
+      }
       
     }
   }
@@ -47,17 +48,25 @@ class Profile extends Component {
     this.props.history.push('/login')
   }
 
+
+  delete = async (id)=>{
+    await AUTH_SERVICE.deleteMI(id)
+    const {data: user} = await AUTH_SERVICE.getProfile(this.state.user)
+    if(!user) return this.props.history.push('/profile')
+    localStorage.user = JSON.stringify(user)
+    this.setState({ user: JSON.parse(localStorage.user) })
+    console.log(id)
+  }
+
   render() {
-    const { name, lastName, mainInstrument, img, friends, username } = this.state.user
-    const {musicInfluences} = this.state
-    console.log(this.state.musicInfluences)
+    const { name, lastName, mainInstrument, img, friends, username, musicInfluences } = this.state.user
     return (
       <div>
         <div>
           <div>
             <h2>Profile</h2>
             <div>
-              <img style={{width: '200px'}}src={img} alt='sadsada'/>
+              <img style={{width: '200px'}}src={img} alt={username}/>
             </div>
             <div>
             </div>
@@ -79,11 +88,11 @@ class Profile extends Component {
             </div>
             <div>
               <h2>Music Influences</h2>
-              <Link to="/spotify">Search Artist</Link>
+              <Link to="/spotify">Add artist</Link>
                 <ul>
-                <li>{musicInfluences.map((musicInf, i)=>{
-                  return <li key={i}>{musicInf.name}</li>
-                })}</li>
+                {musicInfluences.map((musicInf, i)=>{
+                  return <li key={i}>{musicInf.name}<img style={{width:'100px'}} alt={musicInf.name}src={musicInf.images.length>0 ? musicInf.images[0].url: '' }/><button id={musicInf.id} onClick={()=>this.delete(musicInf.id)}>Delete</button></li>
+                })}
               </ul>
             </div>
             <div>
