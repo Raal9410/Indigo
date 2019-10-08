@@ -76,7 +76,7 @@ class EditProfile extends Component{
                     <input type="text" name="mainInstrument" id="mainInstrument" placeholder="Main Instrument" value={mainInstrument} onChange={this.handleInput}/>
                     <br/>
                     <label htmlFor="img">Profile Image</label>
-                    <input name="img" type="file"  onChange={this.handleFile}/>
+                    <input name="img" type="file" onChange={this.handleFile}/>
                    
                     <br/>
                     <img style={{width: '200px'}} src={img} alt={username}/>

@@ -7,6 +7,7 @@ import axios from 'axios';
 const SERVICE = axios.create({ baseURL: 'http://localhost:3001/api/auth', withCredentials: true });
 
 const AUTH_SERVICE = {
+  allUsers: (users)=>SERVICE.get('/allUsers', users),
   signup: (user) => SERVICE.post('/signup', user),
   login: (user) => SERVICE.post('/login', user),
   logout: () => SERVICE.get('/logout'),

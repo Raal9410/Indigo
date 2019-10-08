@@ -31,7 +31,7 @@ class Login extends Component {
     const {data: user} = await AUTH_SERVICE.login(this.state.user)
     localStorage.user = JSON.stringify(user);
     console.log(user)
-    this.props.history.push('/profile')
+    this.props.history.push('/dashboard')
   }
 
   render() {

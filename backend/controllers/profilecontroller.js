@@ -1,7 +1,7 @@
 const User = require('../models/User')
 
 exports.editProfile = async(req, res, next) => {
-  const enabledUpdatesUser = ['username',  'name', 'lastName', 'mainInstrument', ];
+  const enabledUpdatesUser = ['username',  'name', 'lastName', 'mainInstrument' ];
   const updateUser = {$push:{musicInfluences:req.body.musicInfluences}};
   for (const key in req.body) {
     if (enabledUpdatesUser.includes(key))

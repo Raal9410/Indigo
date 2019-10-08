@@ -21,3 +21,9 @@ exports.getProfile = async(req, res, next)=>{
     console.log(req.user)
     res.status(200).json(user)
 }
+
+exports.getAllUsers = async(req,res,next)=>{
+    const users = await User.find()
+    console.log(users)
+    res.status(200).json(users)
+}

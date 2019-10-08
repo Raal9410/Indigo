@@ -7,6 +7,7 @@ import Profile from './components/profile/Profile'
 import EditProfile from './components/profile/EditProfile'
 import NotFound from './components/404/NotFound.js'
 import SpotifyLib from './components/spotify/Spotify';
+import Dashboard from './components/dashboard/Dashboard';
 
 const Router = () => (
   <BrowserRouter>
@@ -16,6 +17,7 @@ const Router = () => (
       <Route exact path="/signup" component={Signup}/>
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/spotify" component={SpotifyLib}/>
+      <Route exact path="/dashboard" component={Dashboard}/>
       <Route exact path="/profile/editProfile" component={EditProfile} />
 <Route component={NotFound} />
     </Switch>

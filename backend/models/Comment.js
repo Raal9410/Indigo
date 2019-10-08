@@ -1,10 +1,14 @@
 const {Schema, model} = require('mongoose')
 
-const postSchema = new Schema (
+const commentSchema = new Schema (
     {
         user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
+    },
+    post: {
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
     },
     content: String,
 }, 
@@ -14,4 +18,4 @@ const postSchema = new Schema (
 }
 )
 
-module.exports = model('Post', postSchema)
+module.exports = model('Comment', commentSchema)
