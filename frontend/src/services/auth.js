@@ -1,10 +1,7 @@
 import axios from 'axios';
 
-//process.env.NODE_ENV === 'production'
-  //? (const baseURL = 'here should be your production endpoint')
-  //: (const baseURL = 'http://localhost:3000');
-
-const SERVICE = axios.create({ baseURL: 'http://localhost:3001/api/auth', withCredentials: true });
+const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001/api/auth'
+const SERVICE = axios.create({ baseURL, withCredentials: true });
 
 const AUTH_SERVICE = {
   allUsers: (users)=>SERVICE.get('/allUsers', users),
@@ -14,7 +11,14 @@ const AUTH_SERVICE = {
   getProfile: (user)=>SERVICE.post('/profile', user),
   editProfile:(update) => SERVICE.post('/editProfile', update),
   getUser: () => SERVICE.get('/loggedin'),
-  deleteMI: (id)=>SERVICE.delete(`/deleteMI/${id}`)
+  deleteMI: (id)=>SERVICE.delete(`/deleteMI/${id}`),
+  createPost: (post)=>SERVICE.post('/createPost', post),
+  userPost: (post)=>SERVICE.get('/userPost', post),
+  editPost: (update, id)=>SERVICE.post(`/editPost/${id}`, update),
+  deletePost: (id)=>SERVICE.delete(`/deletePost/${id}`),
+  addTracks: (track)=>SERVICE.post('/addTracks', track),
+  deleteTrack: (id)=>SERVICE.delete(`/deleteTrack/${id}`),
+  getPlaylist: (playlist)=>SERVICE.get('/getPlaylist', playlist)
 };
 
 export default AUTH_SERVICE;

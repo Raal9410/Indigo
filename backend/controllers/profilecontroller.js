@@ -2,13 +2,17 @@ const User = require('../models/User')
 
 exports.editProfile = async(req, res, next) => {
   const enabledUpdatesUser = ['username',  'name', 'lastName', 'mainInstrument' ];
-  const updateUser = {$push:{musicInfluences:req.body.musicInfluences}};
+  const updateUser = {};
   for (const key in req.body) {
     if (enabledUpdatesUser.includes(key))
       updateUser[key] = req.body[key];
     } 
   if(req.file){
     updateUser.img = req.file.secure_url
+  }
+  if(req.body.musicInfluences){
+    updateUser['$push']={musicInfluences:req.body.musicInfluences}
+    console.log('ESTA MIERDA!!!!',req.body.musicInfluences)
   }
   console.log('asasdsadsads', req.file)
   const user = await User.findByIdAndUpdate(req.user.id, updateUser,{new: true})

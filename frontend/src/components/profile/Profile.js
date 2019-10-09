@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import AUTH_SERVICE from '../../services/auth'
 import SpotifyWebApi from 'spotify-web-api-js'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faUser, faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
 const spotifyWebApi =  new SpotifyWebApi()
 
 class Profile extends Component {
@@ -59,50 +61,46 @@ class Profile extends Component {
   }
 
   render() {
-    const { name, lastName, mainInstrument, img, friends, username, musicInfluences } = this.state.user
+    const { name, lastName, mainInstrument, img, username, musicInfluences } = this.state.user
     return (
-      <div>
-        <div>
-          <div>
+      <div className="profile">
+          
             <h2>Profile</h2>
-            <div>
-              <img style={{width: '200px'}}src={img} alt={username}/>
+            <div className="profileImg">
+              <img style={{width: '300px', height: '300px'}}src={img} alt={username}/>
             </div>
             <div>
-            </div>
-            <div>
-              <h2>username</h2>
+            <div className="profileUsername">
+              <h2>Username</h2>
               <p>{username}</p>
             </div>
-            <div>
+            <div className="profileName">
               <h2>Name</h2>
               <p>{name}</p>
             </div>
-            <div>
+            <div className="profileLastName">
               <h2>Last Name</h2>
               <p>{lastName}</p>
             </div>
-            <div>
+            <div  className="profileMainInstrument">
               <h2>Main Instrument</h2>
               <p>{mainInstrument}</p>
             </div>
-            <div>
+                <div className="logoutButton">
+            <button onClick={this.onLogout}>Logout</button>
+            </div>
+            </div>
+            <div className="profileMusicInfluences">
               <h2>Music Influences</h2>
-              <Link to="/spotify">Add artist</Link>
                 <ul>
                 {musicInfluences.map((musicInf, i)=>{
-                  return <li key={i}>{musicInf.name}<img style={{width:'100px'}} alt={musicInf.name}src={musicInf.images.length>0 ? musicInf.images[0].url: '' }/><button id={musicInf.id} onClick={()=>this.delete(musicInf.id)}>Delete</button></li>
+                  return <li key={i}>{musicInf.name}<img style={{width:'100px'}} alt={musicInf.name} src={musicInf.images.length > 0 ? musicInf.images[0].url: '' }/><button style={{height: '10px'}}id={musicInf.id} onClick={()=>this.delete(musicInf.id)}>Delete</button></li>
                 })}
               </ul>
+                <Link to="/spotify">Add artist</Link>
             </div>
-            <div>
-              <h2>Friends</h2>
-              <p>{friends}</p>
-            </div>
-            <button onClick={this.onLogout}>Logout</button>
-          </div>
-          <div className="right-side">
-            <div>
+          <div>
+            <div >
               <Link to="/profile/editProfile">Edit Profile</Link>
                <br/>
 
@@ -112,10 +110,10 @@ class Profile extends Component {
               </a>
               <br/> 
               <br/>
+              <Link to="/dashboard" >Go to dashboard</Link>
             </div>
           </div>
-        </div>
-      </div>
+          </div>
     )
   }
 }

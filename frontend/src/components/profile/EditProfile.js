@@ -49,7 +49,12 @@ class EditProfile extends Component{
         const fd = new FormData()
         fd.append('img', this.state.img)
         for(const key in this.state.user){
-            fd.append(key, this.state.user[key])
+            if(key!== 'musicInfluences'){
+                fd.append(key, this.state.user[key])
+            }
+            else if(Object.keys(this.state.user.musicInfluences).length === 0 && this.state.user.musicInfluences.constructor === Object){
+                fd.append(key, this.state.user[key])
+            }
         }
         console.log(fd.get('img'))
         const {data: user} = await AUTH_SERVICE.editProfile(fd)
@@ -59,10 +64,11 @@ class EditProfile extends Component{
     render(){
         const {username, name, lastName, mainInstrument, img}= this.state.user
         return(
-            <div>
+            <div className="edit">
+                <div className="editForm">
                 <h1>Update Profile</h1>
-                <form encType="multipart/form-data">
 
+                <form encType="multipart/form-data">
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="Username" value={username} onChange = {this.handleInput}/>
                     <br/>
@@ -79,11 +85,11 @@ class EditProfile extends Component{
                     <input name="img" type="file" onChange={this.handleFile}/>
                    
                     <br/>
-                    <img style={{width: '200px'}} src={img} alt={username}/>
+                    {/* <img style={{width: '200px'}} src={img} alt={username}/> */}
                 </form>
                 <button onClick={this.onSubmit}>Update</button>
                 <button onClick={this.goBack}>Go Back</button>
-
+                </div>
             </div>
         )
     }
