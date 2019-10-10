@@ -42,4 +42,4 @@ yarn start
 ```bash
 node authorization_code/app.js
 ```
-Ya dentro de la aplicación
+Ya dentro de la aplicación dar click en Get Started! Podrás registrarte desde la vista de Login. Después, al hacer login deberás irte a tu perfil para poder conectar Indigo con tu cuenta de Spotify y de esta manera que puedas agregar influencias musicales y crear tu playlist desde dashboard.
