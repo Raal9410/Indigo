@@ -7,7 +7,7 @@ const {registerUser, userLogin, logout, getProfile, getAllUsers} = require('../c
 //profile
 const {editProfile, deleteInfluences} = require('../controllers/profilecontroller')
 //playlist
-const {addTracks, deleteTrack, getPlaylist} = require('../controllers/playlistcontroller')
+const {addTrack, deleteTrack, getPlaylist} = require('../controllers/playlistcontroller')
 ///////////////////////////////////////////////////////////////////
 // post
 const {createPost, userPost, editPost, deletePost} = require('../controllers/postcontroller')
@@ -40,7 +40,7 @@ router.delete('/deletePost/:id', catchErrors(deletePost))
 
 ///////////////////////////////////////////////////////////////////
 //playlist
-router.post('/addTracks', catchErrors(addTracks))
+router.post('/addTrack', catchErrors(addTrack))
 
 router.delete('/deleteTrack/:id', catchErrors(deleteTrack))
 

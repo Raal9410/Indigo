@@ -1,7 +1,6 @@
 const Post = require('../models/Post')
 
 exports.createPost= async(req, res, next)=>{
-    console.log(req.body.content)
     const post = await Post.create({...req.body, user: req.user.id})
     res.status(200).json(post)
 }
