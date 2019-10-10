@@ -15,8 +15,8 @@ var cookieParser = require('cookie-parser');
 
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
-var redirect_uri = backendUrl+'/cb' || 'http://localhost:8888/callback'; // Your redirect uri
-
+var redirect_uri = process.env.backendUrl+'/callback'; // Your redirect uri
+// || 'http://localhost:8888/callback'
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -104,7 +104,7 @@ app.get('/callback', function(req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('http://localhost:3006/profile/#' +
+        res.redirect('https://priceless-meninsky-e3bd71.netlify.com/profile/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token

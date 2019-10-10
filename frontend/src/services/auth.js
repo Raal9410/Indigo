@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3001/api/auth'
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://indigo-gozing.herokuapp.com/api/auth' : 'http://localhost:3001/api/auth'
 const SERVICE = axios.create({ baseURL, withCredentials: true });
 
 const AUTH_SERVICE = {

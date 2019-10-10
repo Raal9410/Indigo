@@ -103,7 +103,7 @@ class Profile extends Component {
                <br/>
 
               <br/>
-              <a href="http://localhost:8888">
+              <a href="https://indigo-gozing.herokuapp.com/">
                 <button>Connect your Spotify account</button>
               </a>
               <br/> 
