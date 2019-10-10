@@ -16,9 +16,9 @@ const AUTH_SERVICE = {
   userPost: (post)=>SERVICE.get('/userPost', post),
   editPost: (update, id)=>SERVICE.post(`/editPost/${id}`, update),
   deletePost: (id)=>SERVICE.delete(`/deletePost/${id}`),
-  addTracks: (track)=>SERVICE.post('/addTracks', track),
+  addTrack: (update)=>SERVICE.post('/addTrack', update),
   deleteTrack: (id)=>SERVICE.delete(`/deleteTrack/${id}`),
-  getPlaylist: (playlist)=>SERVICE.get('/getPlaylist', playlist)
+  getPlaylist: (tracks)=>SERVICE.get('/getPlaylist', tracks)
 };
 
 export default AUTH_SERVICE;

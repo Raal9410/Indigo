@@ -16,7 +16,6 @@ class EditProfile extends Component{
         this.setState((prevState)=>{
             const {user} = prevState
             const userProfile = JSON.parse(localStorage.user)
-            console.log(userProfile)
             for(let key in userProfile){
                 if (key!=='img'){
                     user[key] = userProfile[key]
@@ -56,13 +55,12 @@ class EditProfile extends Component{
                 fd.append(key, this.state.user[key])
             }
         }
-        console.log(fd.get('img'))
         const {data: user} = await AUTH_SERVICE.editProfile(fd)
         localStorage.user = JSON.stringify(user)
         this.props.history.push('/profile')
     }
     render(){
-        const {username, name, lastName, mainInstrument, img}= this.state.user
+        const {username, name, lastName, mainInstrument}= this.state.user
         return(
             <div className="edit">
                 <div className="editForm">

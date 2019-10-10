@@ -8,14 +8,14 @@ class Playlist extends Component {
     constructor(){
         super();
         const token = localStorage.token;
-        //console.log(token)
         if (token) {
           spotifyWebApi.setAccessToken(token);
         }
         this.state = {
           loggedIn: token ? true : false,
           query: '',
-          playlist: [],
+          modalActive: false,
+          playlist: {},
           tracks: [],
           trackInfo: {
               name:'',
@@ -44,13 +44,13 @@ goBack=()=>{
 }
 
 addTracks= async(track)=>{
-    //console.log(artist)
+    this.setState({isModalActive: true })
     const {name, id, artists } = track
+    await AUTH_SERVICE.addTrack({tracks: {name, id, artists}})
     this.setState({
         trackInfo : {name, artists, id}
     })
-    console.log(this.state.trackInfo)
-    await AUTH_SERVICE.addTracks({tracks: {name, id, artists}})
+
     
 
 }
@@ -63,10 +63,9 @@ addTracks= async(track)=>{
 
 
     render() {
-       //console.log(this.state.artistInfo)
-       // const {name, id, images} = this.state.artistInfo
+       const {isModalActive} = this.state
     return (
-            <div>
+            <div className="searchTrack">
                 <div>
                     <h1>Search Tracks</h1>
                 </div>
@@ -74,13 +73,27 @@ addTracks= async(track)=>{
                 <button type="submit" value="Submit"  onClick={this.getTracks}>Find</button>
                 <br/>
                 <button type="submit" value="Go back" onClick={this.goBack}>Go Back To Dashboard</button>
-                    <p>Searched Tracks:</p>
-                    <ul>
+                <p>Searched Tracks:</p>
+                {isModalActive? 
+                    <div className="bg-container">
+                <div className="back-container" onClick={()=>{
+                    this.setState({isModalActive: false})
+                }}></div>
+                <div className="modal-container">
+                    <div className="modalSpotify">
+                        Track added
+                    </div>
+                    </div>
+                    </div>
+                    :undefined
+                    }
+                    <div className="searchedTrack">
+                    <ul style={{listStyleType: "none"}}>
                         {this.state.tracks.map((track, i)=>{
                             return <li key={i}>{track.name} By {track.artists[0].name}<button onClick={() => this.addTracks(track)}>Add</button></li>
                         })}
                     </ul>
-                    
+                    </div>
             </div>
         )
     }

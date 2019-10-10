@@ -30,7 +30,6 @@ class Login extends Component {
   onSubmit = async (e) => {
     const {data: user} = await AUTH_SERVICE.login(this.state.user)
     localStorage.user = JSON.stringify(user);
-    console.log(user)
     this.props.history.push('/dashboard')
   }
 
