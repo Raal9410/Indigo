@@ -71,7 +71,7 @@ addTracks= async(track)=>{
                 </div>
                 <input type='search' name='search' value={this.state.query} onChange={this.handleInput} placeholder='Search'/>
                 <button type="submit" value="Submit"  onClick={this.getTracks}>Find</button>
-                <br/>
+                
                 <button type="submit" value="Go back" onClick={this.goBack}>Go Back To Dashboard</button>
                 <p>Searched Tracks:</p>
                 {isModalActive? 
@@ -88,7 +88,7 @@ addTracks= async(track)=>{
                     :undefined
                     }
                     <div className="searchedTrack">
-                    <ul style={{listStyleType: "none"}}>
+                    <ul>
                         {this.state.tracks.map((track, i)=>{
                             return <li key={i}>{track.name} By {track.artists[0].name}<button onClick={() => this.addTracks(track)}>Add</button></li>
                         })}

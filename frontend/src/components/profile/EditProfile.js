@@ -69,21 +69,19 @@ class EditProfile extends Component{
                 <form encType="multipart/form-data">
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" id="username" placeholder="Username" value={username} onChange = {this.handleInput}/>
-                    <br/>
+
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" id="name" placeholder="Name" value={name} onChange={this.handleInput}/>
-                    <br/>
+                    
                     <label htmlFor="lastName">Last Name</label>
                     <input type="text" name="lastName" id="lastName" placeholder="Last Name" value={lastName} onChange={this.handleInput}/>
-                    <br/>
+                    
                     <label htmlFor="mainInstrument">Main Instrument</label>
                     <input type="text" name="mainInstrument" id="mainInstrument" placeholder="Main Instrument" value={mainInstrument} onChange={this.handleInput}/>
-                    <br/>
+                    
                     <label htmlFor="img">Profile Image</label>
                     <input name="img" type="file" onChange={this.handleFile}/>
-                   
-                    <br/>
-                    {/* <img style={{width: '200px'}} src={img} alt={username}/> */}
+                    
                 </form>
                 <button onClick={this.onSubmit}>Update</button>
                 <button onClick={this.goBack}>Go Back</button>

@@ -69,7 +69,7 @@ class Profile extends Component {
             </nav>
             <div className="profileElements">
             <div className="profileImg">
-              <img style={{width: '300px', height: '300px'}}src={img} alt={username}/>
+              <img src={img} alt={username}/>
             </div>
             <div className="profileInfo">
             <div className="profileUsername">
@@ -92,22 +92,22 @@ class Profile extends Component {
             <div className="profileMusicInfluences">
               <h2>Music Influences</h2>
                   <Link to="/spotify">Add artist</Link>
-                <ul style={{listStyleType: "none"}}>
+                <ul>
                 {musicInfluences.map((musicInf, i)=>{
-                  return <li key={i}><img style={{width:'80px'}} alt={musicInf.name}src={musicInf.images.length>0 ? musicInf.images[0].url: '' }/><p>{musicInf.name}</p><button className="musicInfbutton" style={{height: '30px'}}id={musicInf.id} onClick={()=>this.delete(musicInf.id)}>Delete</button></li>
+                  return <li key={i}><img alt={musicInf.name}src={musicInf.images.length>0 ? musicInf.images[0].url: '' }/><p>{musicInf.name}</p><button className="musicInfbutton" id={musicInf.id} onClick={()=>this.delete(musicInf.id)}>Delete</button></li>
                 })}
               </ul>
             </div>
           <div className="profileRight">
               <Link to="/profile/editProfile">Edit Profile</Link>
-               <br/>
+               
 
-              <br/>
+              
               <a href="https://auth-spotify.herokuapp.com/">
                 <button>Connect your Spotify account</button>
               </a>
-              <br/> 
-              <br/>
+               
+              
               <Link to="/dashboard" >Go to dashboard</Link>
           </div>
           </div>

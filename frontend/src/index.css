@@ -284,7 +284,9 @@ max-width: 98vw;
 .profileImg{
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  width: 300px;
+  height: 300px;
 }
 
 .profileMusicInfluences{
@@ -293,6 +295,18 @@ max-width: 98vw;
   flex-direction: column;
   height: 720px;
   overflow: auto;
+}
+
+.profileMusicInfluences ul{
+  list-style-type: none;
+}
+
+.profileMusicInfluences img{
+  width: 80px;
+}
+
+.musicInfbutton{
+  height: 30px;
 }
 
 .profileRight{
@@ -422,6 +436,14 @@ height: 30px
   justify-content: center;
 }
 
+.searchedArtist ul{
+  list-style-type: none;
+}
+
+.searchedArtistImg {
+  width: 100px;
+}
+
 .searchTrack {
   background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(64,64,67,1) 100%, rgba(0,212,255,1) 100%);
   display: flex;
@@ -465,6 +487,9 @@ height: 30px
   justify-content: center;
 }
 
+.searchTrack ul{
+  list-style-type: none;
+}
 .dashboard{
   display: flex;
   background: linear-gradient(135deg, rgba(26,26,59,0.9251050762101716) 0%, rgba(64,64,67,1) 100%, rgba(0,212,255,1) 100%);

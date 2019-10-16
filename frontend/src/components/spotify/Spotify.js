@@ -68,7 +68,7 @@ addArtist= (artist)=>{
                 <div>
                 <input type='search' name='search' value={this.state.query} onChange={this.handleInput} placeholder='Search'/>
                 <button type="submit" value="Submit"  onClick={this.getArtist}>Find</button>
-                <br/>
+                
                 <button type="submit" value="Go back" onClick={this.goBack}>Go Back To Profile</button>
                 </div>
                     <p>Searched Artists:</p>
@@ -87,12 +87,12 @@ addArtist= (artist)=>{
                     :undefined
                     }
                 <div className="searchedArtist">
-                    <br/>
-                    <br/>
+                    
+                    
 
-                    <ul style={{listStyleType: "none"}}>
+                    <ul>
                         {this.state.artists.map((artist, i)=>{
-                            return <li key={i}>{artist.name}<img style={{width:'100px'}} alt={artist.name}src={artist.images.length>0 ? artist.images[0].url: '' }/>
+                            return <li key={i}>{artist.name}<img className="searchedArtistImg" alt={artist.name}src={artist.images.length>0 ? artist.images[0].url: '' }/>
                             <button onClick={() => this.addArtist(artist)}>Add</button></li>
                         })}
                     </ul>

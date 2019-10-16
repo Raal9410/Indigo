@@ -30,21 +30,21 @@ router.delete('/deleteMI/:id', isAuth, catchErrors(deleteInfluences))
 
 ///////////////////////////////////////////////////////////////////
 //posts routes  
-router.post('/createPost',  catchErrors(createPost))
+router.post('/createPost', isAuth,  catchErrors(createPost))
 
-router.get('/userPost',  userPost)
+router.get('/userPost', isAuth, userPost)
 
-router.post('/editPost/:id',  catchErrors(editPost))
+router.post('/editPost/:id', isAuth, catchErrors(editPost))
 
-router.delete('/deletePost/:id', catchErrors(deletePost))
+router.delete('/deletePost/:id', isAuth, catchErrors(deletePost))
 
 ///////////////////////////////////////////////////////////////////
 //playlist
-router.post('/addTrack', catchErrors(addTrack))
+router.post('/addTrack', isAuth, catchErrors(addTrack))
 
-router.delete('/deleteTrack/:id', catchErrors(deleteTrack))
+router.delete('/deleteTrack/:id', isAuth, catchErrors(deleteTrack))
 
-router.get('/getPlaylist', getPlaylist)
+router.get('/getPlaylist', isAuth, getPlaylist)
 
 ////////////////////////////////////////////////////////////////////
 //auth
